@@ -137,7 +137,7 @@
       background: #fff;
       backface-visibility: hidden;
       transform: translateZ(0.1px);
-      box-shadow: inset 2px 0 5px rgba(0,0,0,0.1);
+      box-shadow: inset 1px 0 2px rgba(255,255,255,0.6);
     }
 
     .book-3d::before {
@@ -150,25 +150,14 @@
       background-image: var(--src);
       background-size: cover;
       background-position: left center;
-      background: linear-gradient(to right, rgba(0,0,0,0.2), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.1)), var(--src);
+      background: linear-gradient(to right, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 20%, rgba(0,0,0,0.05) 100%), var(--src);
       background-size: 100% 100%, cover;
       
       transform-origin: right;
       transform: rotateY(-90deg);
       border-radius: 2px 0 0 2px;
-    }
-
-    .book-3d::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      right: 0;
-      width: 20px;
-      height: calc(100% - 4px);
-      background: linear-gradient(to right, #fff 2px, #f0f0f0 4px);
-      background-size: 4px 100%;
-      transform-origin: center right;
-      transform: rotateY(90deg);
+      border-left: 1px solid rgba(255,255,255,0.5);
+      border-right: 1px solid rgba(255,255,255,0.3);
     }
 
     .book:hover .book-3d {
