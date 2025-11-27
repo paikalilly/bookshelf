@@ -59,28 +59,37 @@
       margin-bottom: 80px;
     }
 
-    /* Shelf */
+/* Shelf container */
     .shelf-wrapper {
       position: relative;
       width: min(90%, 950px);
+      margin-top: 40px;
       display: flex;
       justify-content: center;
-      align-items: flex-end;
-      margin-top: 20px;
     }
 
-    .shelf {
+/* The top of the shelf */
+    .shelf-top {
       position: absolute;
-      bottom: 0;
+      bottom: 40px; /* height of the front face */
       width: 100%;
-      height: 70px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 6px;
-      box-shadow:
-        0 18px 35px rgba(0, 0, 0, 0.35),
-        inset 0 1px 0 rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(10px);
+      height: 28px;
+      background: #cba;
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.35);
     }
+
+/* The front face of the shelf */
+.shelf-front {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px; /* visible thickness */
+  background: #b79;
+  border-radius: 0 0 4px 4px;
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.3);
+}
+
 
     /* Books */
     .books {
@@ -201,7 +210,8 @@
     <div class="subtitle">a portfolio of works by parishka kiara</div>
 
     <div class="shelf-wrapper">
-      <div class="shelf"></div>
+      <div class="shelf-top"></div>
+      <div class="shelf-front"></div>
 
       <div class="books">
         <!-- book 1 -->
