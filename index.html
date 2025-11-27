@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>architecture</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* Background image */
+    .bg {
+      position: fixed;
+      inset: 0;
+      background: url("background.jpg") center center / cover no-repeat;
+      filter: grayscale(0.1);
+      z-index: -1;
+    }
+
+    /* Centered layout */
+    .content {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 60px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 80px;
+    }
+
+    /* Shelf */
+    .shelf-wrapper {
+      position: relative;
+      width: min(90%, 950px);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: 20px;
+    }
+
+    .shelf {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 70px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      box-shadow:
+        0 18px 35px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Books */
+    .books {
+      position: relative;
+      display: flex;
+      gap: clamp(30px, 6vw, 60px);
+      padding: 0 40px 40px;
+    }
+
+    .book {
+      position: relative;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      outline: none;
+      transform-origin: center bottom;
+      transition:
+        transform 180ms ease-out,
+        box-shadow 180ms ease-out,
+        filter 180ms ease-out;
+    }
+
+    .book img {
+      display: block;
+      width: clamp(140px, 18vw, 190px);
+      aspect-ratio: 3 / 4;
+      border-radius: 14px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+      background: #f5f5f5;
+      object-fit: cover;
+    }
+
+    .book:hover {
+      transform: translateY(-12px) scale(1.03);
+      filter: brightness(1.05);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+    }
+
+    .book:active {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 20;
+      padding: 20px;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      height: min(85vh, 650px);
+      background: #111;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.85);
+    }
+
+    .modal-close {
+      border: none;
+      background: none;
+      color: #fff;
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 8px;
+    }
+
+    .modal-frame {
+      flex: 1;
+      border: none;
+      width: 100%;
+      background: #111;
+    }
+
+    @media (max-width: 640px) {
+      .subtitle {
+        margin-bottom: 50px;
+        padding: 0 20px;
+      }
+      .shelf {
+        height: 60px;
+      }
+      .books {
+        gap: 20px;
+        padding-inline: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <div class="content">
+    <h1>architecture</h1>
+    <div class="subtitle">a portfolio of works by parishka kaira</div>
+
+    <div class="shelf-wrapper">
+      <div class="shelf"></div>
+
+      <div class="books">
+        <!-- book 1 -->
+        <button class="book" data-url="https://heyzine.com/flip-book/215f3b7459.html">
+          <img src="cover1.jpg" alt="architectural design portfolio" />
+        </button>
+
+        <!-- book 2 -->
+        <button class="book" data-url="https://heyzine.com/flip-book/5886207e5b.html">
+          <img src="cover2.jpg" alt="professional portfolio" />
+        </button>
+
+        <!-- book 3 -->
+        <button class="book" data-url="https://your-link-3">
+          <img src="cover3.jpg" alt="academic portfolio" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="bookModal">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+      </div>
+      <iframe
+        id="modalFrame"
+        class="modal-frame"
+        src=""
+        title="portfolio viewer"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("bookModal");
+    const iframe = document.getElementById("modalFrame");
+    const closeBtn = document.getElementById("modalClose");
+
+    document.querySelectorAll(".book").forEach((book) => {
+      book.addEventListener("click", () => {
+        const url = book.getAttribute("data-url");
+        if (!url) return;
+        iframe.src = url;
+        modal.classList.add("open");
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.classList.remove("open");
+      iframe.src = "";
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.classList.remove("open");
+        iframe.src = "";
+      }
+    });
+  </script>
+</body>
+</html>
