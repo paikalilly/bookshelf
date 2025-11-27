@@ -107,6 +107,7 @@
       padding: 0;
       margin-bottom: 40px;
       z-index: 10;
+      perspective: 1000px;
     }
 
     .book {
@@ -116,50 +117,64 @@
       padding: 0;
       cursor: pointer;
       outline: none;
-      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    .book img {
-      display: block;
+    .book-3d {
+      position: relative;
       width: clamp(140px, 18vw, 200px);
       aspect-ratio: 1 / 1;
+      transform-style: preserve-3d;
+      transform-origin: center left;
+      transform: rotateY(-30deg) translateZ(0);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 15px 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .book-3d img {
+      display: block;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      
-      border-radius: 2px;
-      background: #f6f6f6;
-      box-shadow: 
-        -5px 0 10px rgba(0,0,0,0.2), /* Spine shadow */
-        0 10px 20px rgba(0,0,0,0.3); /* Drop shadow */
-
-      transform: perspective(1000px) rotateY(-5deg);
-      transition: all 0.3s ease
+      border-radius: 0 4px 4px 0;
+      background: #fff;
+      transform: translateZ(0);
+      box-shadow: inset 3px 0 10px rgba(0,0,0,1);
     }
 
-    .book:hover {
+    .book-3d::before {
+      content:'';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 25px;
+      height: 100%;
+      background-image: var(--src);
+      background-size: cover;
+      background-position: left center;
+      filter: brightness(0.7);
+      transform-origin: center left;
+      transform: rotateY(-90deg) translateX(-25px);
+      border-radius: 2px 0 0 2px;
+    }
+
+    .book-3d::after {
+      content: '';
+      position: absolute';
+      top: 2px;
+      right: 0;
+      width: 20px;
+      height: calc(100% - 4px);
+      background: linear-gradient(to right #fff 2px, #f0f0f0 4px);
+      background-size: 4px 100%;
+      transform-origin: center right;
+      transform: rotateY(90deg);
+    }
+
+    .book:hover .book-3d {
+      transform: rotateY(0deg) scale (1.05) translateZ(0);
       z-index: 20;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
     }
-
-    .book:hover img {
-      transform: perspective(1000px) rotateY(0deg) scale(1.05) translateY(-10px);
-      box-shadow: 0 25px 40px rgba(0,0,0,0.4);
-    }
-
-  .book::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 10%;
-    width: 80%;
-    height: 15px;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, transparent 70%);
-    filter: blur(5px_;
-    z-index: -1;
-    opacity: 0.6;
-  }
-
-  ,book:hover::after {
-    opacity: 1;
-  }
 
 
 
@@ -245,17 +260,23 @@
       <div class="books">
         <!-- book 1 -->
         <button class="book" data-url="https://heyzine.com/flip-book/215f3b7459.html">
-          <img src="cover1.jpg" alt="architectural design portfolio" />
+          <div class="book-3d" style="--src:url('cover1.jpg')">
+            <img src="cover1.jpg" alt="architectural design portfolio" />
+          </div>
         </button>
 
         <!-- book 2 -->
         <button class="book" data-url="https://heyzine.com/flip-book/5886207e5b.html">
-          <img src="cover2.jpg" alt="professional portfolio" />
+          <div class="book-3d" style="--src:url('cover2.jpg')">
+            <img src="cover2.jpg" alt="professional portfolio" />
+          </div>
         </button>
 
         <!-- book 3 -->
         <button class="book" data-url="https://your-link-3">
-          <img src="cover3.jpg" alt="academic portfolio" />
+          <div class="book-3d" style="--src:url('cover3.jpg')">
+            <img src="cover3.jpg" alt="academic portfolio" />
+          </div>
         </button>
       </div>
     </div>
