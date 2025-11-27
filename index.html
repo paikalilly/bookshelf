@@ -74,7 +74,7 @@
     .shelf-top {
       position: absolute;
       bottom: 15px; /* height of the front face */
-      width: 98%;
+      width: 100%;
       height: 120px;
       background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.2));
       transform-origin: bottom center;
@@ -85,18 +85,18 @@
     }
 
 /* The front face of the shelf */
-.shelf-front {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 15px;
-  background: rgba(255,255,255, 0.25);
-  backdrop-filter: blur(4px);
-  border-top: 1px solid rgba(255,255,255,0.4);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-  z-index: 5;
-}
+  .shelf-front {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 15px;
+    background: rgba(255,255,255, 0.25);
+    backdrop-filter: blur(4px);
+    border-top: 1px solid rgba(255,255,255,0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    z-index: 5;
+  }
 
 
     /* Books */
@@ -105,7 +105,7 @@
       display: flex;
       gap: clamp(40px, 8vw, 80px);
       padding: 0;
-      margin-bottom: 15px;
+      margin-bottom: 40px;
       z-index: 10;
     }
 
@@ -147,15 +147,14 @@
   .book::after {
     content: "";
     position: absolute;
-    bottom: -8px;
-    left: 5%;
-    width: 90%;
-    height: 10px;
-    background: rgba(0,0,0,0.3);
-    filter: blur(8px_;
+    bottom: -10px;
+    left: 10%;
+    width: 80%;
+    height: 15px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, transparent 70%);
+    filter: blur(5px_;
     z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s;
+    opacity: 0.6;
   }
 
   ,book:hover::after {
